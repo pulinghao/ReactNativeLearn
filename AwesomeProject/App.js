@@ -1,9 +1,13 @@
 // In App.js in a new project
 
 import * as React from 'react';
-import { Button, View, Text } from 'react-native';
+import { Button, View, Text, StyleSheet, ScrollView} from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+
+
+import Heading from './components/Heading'
+import TextInput from './components/TextInput'
 
 function HomeScreen({ navigation }) {
   return (
@@ -46,37 +50,88 @@ function DetailsScreen({route, navigation }) {
   );
 }
 
+function getSum(a,b){
+  return a+b;
+}
+
 const Stack = createNativeStackNavigator();
 
-function App() {
-  return (
-    <NavigationContainer>
-      <Stack.Navigator initialRouteName="Home">
-      <Stack.Screen
-        name="Home"
-        component={HomeScreen}
-        options={{
-          title: 'My home',
-          headerStyle: {
-            backgroundColor: '#f4511e',
-          },
-          headerTintColor: '#fff',
-          headerTitleStyle: {
-            fontWeight: 'bold',
-          },
-          headerRight: () => (
-            <Button
-              onPress={() => alert('This is a button!')}
-              title="Info"
-              color="#fff"
-            />
-          ),
-        }}
-      />
-        <Stack.Screen name="Details" component={DetailsScreen} />
-      </Stack.Navigator>
-    </NavigationContainer>
-  );
+// 主程序入口
+class App extends React.Component {
+  constructor(){
+    super()
+    this.state = {
+      inputValue:'',
+      todos:[],
+      type:'All',
+      sum:0,
+    }
+  }
+  componentDidMount(){
+    var sumNum = getSum(1,2);
+    this.setState({
+      sum:sumNum
+    });
+  }
+  
+  render(){
+    return(
+      <View style={styles.container}>
+        <ScrollView keyboardShouldPersistTaps='always' style={styles.content}>
+          <Heading />
+          <Text>{this.state.sum}</Text>
+        </ScrollView>
+      </View>
+    )
+    
+    // <NavigationContainer>
+    //   <Stack.Navigator initialRouteName="Home">
+    //   <Stack.Screen
+    //     name="Home"
+    //     component={HomeScreen}
+    //     options={{
+    //       title: 'My home',
+    //       headerStyle: {
+    //         backgroundColor: '#f4511e',
+    //       },
+    //       headerTintColor: '#fff',
+    //       headerTitleStyle: {
+    //         fontWeight: 'bold',
+    //       },
+    //       headerRight: () => (
+    //         <Button
+    //           onPress={() => alert('This is a button!')}
+    //           title="Info"
+    //           color="#fff"
+    //         />
+    //       ),
+    //     }}
+    //   />
+    //     <Stack.Screen name="Details" component={DetailsScreen} />
+    //   </Stack.Navigator>
+    // </NavigationContainer>
+  }
 }
+
+const styles = StyleSheet.create({
+  header:{
+    marginTop : 80
+  },
+  headText:{
+    textAlign:'center',
+    fontSize:72,
+    color:'rgba(175,47,47,0.25)',
+    fontWeight:'100'
+  },
+  container:{
+    flex:1,
+    backgroundColor:'#f5f5f5'
+  },
+
+  content:{
+    flex:1,
+    paddingTop:60
+  }
+})
 
 export default App;

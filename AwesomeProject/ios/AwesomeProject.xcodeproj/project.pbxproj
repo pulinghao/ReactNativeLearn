@@ -500,7 +500,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.baidu.rnative.pu;
 				PRODUCT_NAME = AwesomeProject;
-				PROVISIONING_PROFILE_SPECIFIER = mapMap25;
+				PROVISIONING_PROFILE_SPECIFIER = mapMap33;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -529,7 +529,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.baidu.rnative.pu;
 				PRODUCT_NAME = AwesomeProject;
-				PROVISIONING_PROFILE_SPECIFIER = mapMap25;
+				PROVISIONING_PROFILE_SPECIFIER = mapMap33;
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
