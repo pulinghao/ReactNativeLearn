@@ -1,9 +1,11 @@
 import React from 'react'
 import {View, TextInput, StyleSheet} from 'react-native'
 
-const Input = () => (
+const Input = ({inputValue,inputChange}) => ( //这儿使用了无状态的组件
     <View style={styles.inputContainer}>
         <TextInput style={styles.input} 
+        value={inputValue}
+        onChangeText={inputChange}
         placeholder='What needs to be done' 
         placeholderTextColor='#CACACA'
         selectionColor='#666666'>

@@ -7,7 +7,9 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 
 import Heading from './components/Heading'
-import TextInput from './components/TextInput'
+import Input from './components/TextInput'
+import HighLightButton from './components/Button'
+import TodoList from './components/TodoList';
 
 function HomeScreen({ navigation }) {
   return (
@@ -56,6 +58,7 @@ function getSum(a,b){
 
 const Stack = createNativeStackNavigator();
 
+let todoIndex = 0
 // 主程序入口
 class App extends React.Component {
   constructor(){
@@ -66,20 +69,74 @@ class App extends React.Component {
       type:'All',
       sum:0,
     }
+    this.submitTodo = this.submitTodo.bind(this) //将方法绑定
+    this.toggleComplete = this.toggleComplete.bind(this)
+    this.deleteTodo = this.deleteTodo.bind(this)
   }
+
+  inputChange(inputValue){
+    console.log('Input value:', inputValue)
+    this.setState({inputValue})
+  }
+
+  deleteTodo(todoIndex){
+    let {todos} = this.state
+    todos = todos.filter((todo)=>todo.todoIndex !== todoIndex)
+    this.setState({todos})
+  }
+
+  toggleComplete(todoIndex){
+    let todos = this.state.todos
+    todos.forEach((todo)=>{
+      if(todo.todoIndex === todoIndex){
+        todo.complete = !todo.complete
+      }
+    })
+    this.setState({todos})
+  }
+
+  submitTodo(){
+    if (this.state.inputValue.match(/^\s*$/)) {
+      return
+    }
+
+    const todo = {
+      title : this.state.inputValue,
+      todoIndex,   //常规数据类型，直接传即可
+      complete:false
+    }
+    todoIndex++
+    const todos = [...this.state.todos,todo]
+    this.setState({todos,inputValue:''},()=>{
+      // console.log('State:',this.state)
+    })
+  }
+
   componentDidMount(){
-    var sumNum = getSum(1,2);
+    var sumNum = this.getMinus(2,1)
     this.setState({
       sum:sumNum
     });
   }
+
+  getMinus(a,b) {
+    return a - b;
+  }
   
   render(){
+    const {inputValue, todos} = this.state
     return(
       <View style={styles.container}>
         <ScrollView keyboardShouldPersistTaps='always' style={styles.content}>
           <Heading />
           <Text>{this.state.sum}</Text>
+          <Input inputValue={inputValue}
+          inputChange={(text)=>this.inputChange(text)}>
+          </Input>
+          <TodoList todos={todos}></TodoList>
+          <HighLightButton submitTodo={this.submitTodo}>
+
+          </HighLightButton>
         </ScrollView>
       </View>
     )
