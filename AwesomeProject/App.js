@@ -10,6 +10,7 @@ import Heading from './components/Heading'
 import Input from './components/TextInput'
 import HighLightButton from './components/Button'
 import TodoList from './components/TodoList';
+import TabBar from './components/TabBar';
 
 function HomeScreen({ navigation }) {
   return (
@@ -69,11 +70,15 @@ class App extends React.Component {
       type:'All',
       sum:0,
     }
+    this.setType = this.setType.bind(this)
     this.submitTodo = this.submitTodo.bind(this) //将方法绑定
     this.toggleComplete = this.toggleComplete.bind(this)
     this.deleteTodo = this.deleteTodo.bind(this)
   }
 
+  setType(type){
+    this.setState({type})
+  }
   inputChange(inputValue){
     console.log('Input value:', inputValue)
     this.setState({inputValue})
@@ -124,7 +129,7 @@ class App extends React.Component {
   }
   
   render(){
-    const {inputValue, todos} = this.state
+    const {inputValue, todos, type} = this.state
     return(
       <View style={styles.container}>
         <ScrollView keyboardShouldPersistTaps='always' style={styles.content}>
@@ -133,11 +138,20 @@ class App extends React.Component {
           <Input inputValue={inputValue}
           inputChange={(text)=>this.inputChange(text)}>
           </Input>
-          <TodoList todos={todos}></TodoList>
+          <TodoList
+            type={type}
+            toggleComplete={this.toggleComplete}
+            deleteTodo={this.deleteTodo}
+            todos={todos}
+          >
+
+          </TodoList>
           <HighLightButton submitTodo={this.submitTodo}>
 
           </HighLightButton>
         </ScrollView>
+        <TabBar type={type} setType={this.setType}>
+        </TabBar>
       </View>
     )
     
