@@ -11,17 +11,17 @@ const Heading = () =>(
 
 
 const styles = StyleSheet.create({
-    header:{
-      marginTop : 80
-    },
-    headerText:{
-      textAlign: 'center',
-      fontSize: 72,
-      color:'rgba(175,47,47,0.25)',
-    //   color:'red',
-      fontWeight: '100'
-    },
-  })
+  header:{
+    marginTop : 80
+  },
+  headerText:{
+    textAlign: 'center',
+    fontSize: 72,
+    color:'rgba(175,47,47,0.25)',
+  //   color:'red',
+    fontWeight: '100'
+  },
+})
   
 
 export default Heading;

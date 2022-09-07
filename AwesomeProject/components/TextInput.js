@@ -9,7 +9,6 @@ const Input = ({inputValue,inputChange}) => ( //这儿使用了无状态的组�
         placeholder='What needs to be done' 
         placeholderTextColor='#CACACA'
         selectionColor='#666666'>
-
         </TextInput>
     </View>
 )
