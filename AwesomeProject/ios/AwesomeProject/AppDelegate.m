@@ -33,7 +33,7 @@ static void InitializeFlipper(UIApplication *application) {
 
   RCTBridge *bridge = [[RCTBridge alloc] initWithDelegate:self launchOptions:launchOptions];
   RCTRootView *rootView = [[RCTRootView alloc] initWithBridge:bridge
-                                                   moduleName:@"CitiesApp"
+                                                   moduleName:@"CitiesApp"  //只需要修改moduleName，就可以调起不同的RN页面了（端口号为8081）
                                             initialProperties:nil];
 
   if (@available(iOS 13.0, *)) {
